@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+/* Полностью убираем любые отступы у страницы и запрещаем лишние прокрутки */
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
