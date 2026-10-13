@@ -15,6 +15,9 @@ export default function Home() {
 
   const currentTicket = ticketsData[currentIndex] || {};
 
+  // Вычисляем виртуальный номер строго от 1 до 20
+  const displayTicketNumber = (currentIndex % 20) + 1;
+
   // Если билет не найден, массивы подсветки будут пустыми
   const highlightedTop = isValidSearch
     ? [
@@ -73,7 +76,7 @@ export default function Home() {
       className="min-h-screen m-0 p-0 flex flex-col font-sans max-w-full overflow-x-hidden"
     >
       {/* БЛОК 1 */}
-      <div className="grid grid-cols-9 gap-0 w-full justify-items-stretch mb-2">
+      <div className="grid grid-cols-9 gap-0 w-full justify-items-stretch mb-1">
         {topNumbers.map((num) => {
           const isHighlighted = highlightedTop.includes(num);
           return (
@@ -102,7 +105,7 @@ export default function Home() {
         );
 
         return (
-          <div className="grid grid-cols-9 gap-0 w-full justify-items-stretch mb-2">
+          <div className="grid grid-cols-9 gap-0 w-full justify-items-stretch mb-1">
             {currentLineNumbers.map((num) => {
               const isHighlighted = highlightedBottom.includes(num);
               return (
@@ -124,24 +127,26 @@ export default function Home() {
 
       {/* БЛОК 3 */}
       <div className="flex items-center gap-2 w-full text-base font-black">
-        {/* Контейнер для текста и инпута, чтобы они смотрелись единым целым */}
-        <div className="flex items-center gap-1 text-[#FFF7C6] select-none pl-3">
-          <span>ЭТО БИЛЕТ</span>
+        {/* Контейнер для текста и инпута */}
+        <div className="flex items-center text-[#FFF7C6] select-none pl-4 whitespace-nowrap">
+          <span>БИЛЕТ {displayTicketNumber}</span>
+          <span className="text-[#FFF7C6] ml-2 font-medium opacity-90">(</span>
           <input
             type="text"
             value={searchId}
             onChange={handleSearch}
-            placeholder="№"
+            placeholder="id"
             style={{ color: "#FFF7C6" }}
-            className="w-12 bg-transparent border-none outline-none p-0 focus:outline-none text-left font-black transition-colors focus:text-[#FFC525]"
+            className="w-12 bg-transparent border-none outline-none p-0 focus:outline-none text-center font-black transition-colors focus:text-[#FFC525]"
           />
+          <span className="text-[#FFF7C6] font-medium opacity-90">)</span>
         </div>
 
         {/* Кнопка НАЗАД */}
         <button
           onClick={handlePrev}
           style={{ backgroundColor: "#FFC525", color: "#8E1C01" }}
-          className="w-12 p-2 rounded-xl transition-all cursor-pointer active:bg-[#FFC525] active:text-[#0F005D] hover:opacity-90 text-center ml-auto"
+          className="w-12 p-1 rounded-xl transition-all cursor-pointer active:bg-[#FFC525] active:text-[#0F005D] hover:opacity-90 text-center ml-auto"
         >
           &lt;
         </button>
@@ -150,7 +155,7 @@ export default function Home() {
         <button
           onClick={handleNext}
           style={{ backgroundColor: "#FFC525", color: "#8E1C01" }}
-          className="flex-1 p-2 rounded-xl transition-all cursor-pointer active:bg-[#FFC525] active:text-[#0F005D] hover:opacity-90 text-center whitespace-nowrap overflow-hidden text-ellipsis"
+          className="flex-1 p-1 rounded-xl transition-all cursor-pointer active:bg-[#FFC525] active:text-[#0F005D] hover:opacity-90 text-center whitespace-nowrap overflow-hidden text-ellipsis"
         >
           СЛЕДУЮЩИЙ
         </button>
